@@ -18,7 +18,7 @@ The magic is in the fact that the model fetching and translation are both handel
 ## Usage
 
 ```bash
-npm install --save git+http://git@github.com/lzilioli/template-exporter.git
+npm install --save git+http://git@github.com/lzilioli/template-export.git
 ```
 
 ## Configuring The Task
