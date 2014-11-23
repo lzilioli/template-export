@@ -1,9 +1,9 @@
-grunt-template-export
-=====================
+template-export
+===============
 
-A grunt multi-task, in MVC terms, a controller that acts as a near-transparent liason between a model and a view (referred to as a translator within this project). It enables the simple, yet highly custom exporting of templates (or other content) to a given destination.
+A module, in MVC terms, a controller that acts as a near-transparent liason between a model and a view (referred to as a translator within this project). It enables the simple, yet highly custom exporting of templates (or other content) to a given destination.
 
-The template-export task has five primary concerns:
+The template-export module has five primary concerns:
 
 1. build a list of source => dest file mappings
 2. for each source => dest pair, fetch a model from a user-defined module

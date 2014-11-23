@@ -1,7 +1,7 @@
 {
-  "name": "grunt-template-export",
-  "version": "0.0.2",
-  "main": "./lib/grunt-template-export.js",
+  "name": "template-export",
+  "version": "0.1.0",
+  "main": "./lib/template-export.js",
   "author": "Luke Zilioli <elzee08@gmail.com> (http://lukezilioli.com/)",
   "dependencies": {
     "underscore": "^1.6.0"
@@ -14,11 +14,12 @@
     "grunt-todo": "~0.4.0",
     "jshint-stylish": "^0.4.0",
     "load-grunt-config": "^0.12.0",
-    "shelljs": "~0.3.0"
+    "shelljs": "~0.3.0",
+    "lz-node-utils" :"lzilioli/lz-node-utils"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lzilioli/grunt-template-export.git"
+    "url": "https://github.com/lzilioli/template-export.git"
   },
   "keywords": [
     "grunt",
@@ -29,8 +30,8 @@
     "static-site"
   ],
   "bugs": {
-    "url": "https://github.com/lzilioli/grunt-template-export/issues"
+    "url": "https://github.com/lzilioli/template-export/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/lzilioli/grunt-template-export"
+  "homepage": "https://github.com/lzilioli/template-export"
 }
