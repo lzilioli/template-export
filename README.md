@@ -18,129 +18,99 @@ The magic is in the fact that the model fetching and translation are both handel
 ## Usage
 
 ```bash
-npm install --save git+http://git@github.com/lzilioli/node-template-exporter.git
+npm install --save git+http://git@github.com/lzilioli/template-exporter.git
 ```
 
 ## Configuring The Task
 
-```JavaScript
-
+```javascript
 var handlebars = require( 'handlebars' );
-
-grunt.initConfig({
-	template-export: {
-		options: {
-			/* NOTE: The opts argument passed to model.getModel, model.init,
-			 * translator.init, and translator.translate will contain all of
-			 * the options passed in except for the following 3
-			 * reserved keys (explained below):
-			 * 	[ sourceFiles | translator | model ] */
-			sourceFiles: {
-				/* This should be an object containing key/value
-				 * pairs, where each value specifies a set of files
-				 * associated with the given key.
-				 *
-				 * Each set of values will be expanded into a flat list
-				 * of source files. You can specify the source files
-				 * the same way you would specify files to a grunt
-				 * read-only task.
-				 *
-				 * The resulting object will then be passed to
-				 * model.init and translator.init. Those functions
-				 * may do with the object what they please.
-				 *
-				 * This might be used to pass a list of markdown files
-				 * to your model, and a set of templates to your
-				 * translator for proper rendering. It's all up
-				 * to you. */
-				templates: { src: [ 'templates/**/*.tmpl' ] },
-				posts: { src: [ 'blog/posts/**/*.md' ] }
-			},
-			/* Below are the default implementations for a model and a
-			 * translator. If you don't provide either in the task options,
-			 * the default implementation will be used. Additionally,
-			 * if the model or translator that you provide omits one
-			 * of the expected functions, the task will fall back on the
-			 * implementations provided below for that function only. */
-			model: {
-				init: _.noop,
-				getModel: function() { return { }; }
-			},
-			translator: {
-				init: _.noop,
-				translate: _.identity
-				// _.identity is a fn that returns it's first arg
-			}
-		},
-		/****** EXAMPLES ************************************/
-		// Export the homepage, specified by templates/index.tmpl to
-		// export/blog.html, registering all partials in sourceFiles.templates
-		// as handlebars partials
-		homepage: {
-			src: [ 'src/templates/index.tmpl' ],
-			dest: [ 'export/blog/index.html' ],
-			options: {
-				/* A default handlebars translator is provided. This
-				 * translator will automatically register all of the
-				 * templates specified in options.templates that pass
-				 * the isPartial test with handlebars with the name
-				 * returned by getPartialName.
-				 *
-				 * During translation, your template will be run through
-				 * handlebars with the designated partials registered.
-				 *
-				 * See the below "Extending the Default Translator" section
-				 * for an example on inheriting some of the default handlebars
-				 * translator's functionality. */
-				translator: require('grunt-template-export').translators.handlebars(
-					/* You must pass handlebars as your first argument
-					 * (see v0.0.2 commit for v0.0.2 for an explanation) */
-					handlebars,
-					/* The second argument is optional. It allows you to
-					 * specify functions to determine if a template
-					 * should be considered a partial (isPartial), and if so,
-					 * what name to register with handlebars (getPartialName)
-					 * If either is omitted, the default implementations
-					 * (shown below) will be used. */
-					{
-						getPartialName: function( partialPath ) {
-							// The relative path of the partial from sourceDir, without the .tmpl extension
-							return partialPath.replace( '.tmpl', '' );
-						},
-						isPartial: function( filePath ) {
-							// Something is considered a partial if the filename begins with `_`
-							return path.basename( filePath )[ 0 ] === '_';
-						}
-					}
-				)
-			}
-		},
-		// Render all of the templates in templates/**/*.tmpl out to
-		// their corresponding location in build/static with the
-		// .html extension, using a static model specified with JSON
-		all: {
-			expand: true,
-			cwd: 'templates',
-			src: [ '**/*.tmpl' ],
-			dest: 'build/static',
-			options: {
-				translator: require( 'grunt-template-expander' ).translators.handlebars(handlebars),
-				model: {
-					getModel: function(){ grunt.file.readJSON( 'model.json' ) }
-				}
-			}
-		},
-		// Move all of the files in templates/**/*.tmpl out to
-		// their corresponding location in build/templates
-		// (since this falls back on the default implementations for
-		// the model and the translator, the templates pass-through the
-		// task without being altered).
-		move: {
-			src: 'templates/**/*.tmpl',
-			dest: 'build/templates'
-		}
+var templateExport = require( 'template-export' );
+var exporter = templateExport.exporter({
+	/* NOTE: The opts argument passed to model.getModel, model.init,
+	 * translator.init, and translator.translate will contain all of
+	 * the options passed in except for the following 3
+	 * reserved keys (explained below):
+	 * 	[ sourceFiles | translator | model ] */
+	sourceFiles: {
+		/* This should be an object containing key/value
+		 * pairs, where each value specifies a set of files
+		 * associated with the given key (array).
+		 *
+		 * The value is passed to function that does the equivalent
+		 * of grunt's file.expand function.
+		 *
+		 * The resulting object will then be passed to
+		 * model.init and translator.init. Those functions
+		 * may do with the object what they please.
+		 *
+		 * This might be used to pass a list of markdown files
+		 * to your model, and a set of templates to your
+		 * translator for proper rendering. It's all up
+		 * to you. */
+		templates: [ 'templates/**/*.tmpl' ],
+		posts: [ 'blog/posts/**/*.md' ]
+	},
+	/* Below are the default implementations for a model and a
+	 * translator. If you don't provide either in the task options,
+	 * the default implementation will be used. Additionally,
+	 * if the model or translator that you provide omits one
+	 * of the expected functions, the task will fall back on the
+	 * implementations provided below for that function only. */
+	model: {
+		init: _.noop,
+		getModel: function() { return { }; }
+	},
+	translator: {
+		init: _.noop,
+		translate: _.identity
+		// _.identity is a fn that returns it's first arg
 	}
 });
+
+/****** EXAMPLES ************************************/
+
+// Get the rendered homepage, specified by src/templates/index.tmpl
+var homepageExporter = templateExport({
+	sourceFiles: {
+		templates: 'templates/**/*.tmpl'
+	},
+	/* A default handlebars translator is provided. This
+	 * translator will automatically register all of the
+	 * templates specified in options.templates that pass
+	 * the isPartial test with handlebars with the name
+	 * returned by getPartialName.
+	 *
+	 * During translation, your template will be run through
+	 * handlebars with the designated partials registered.
+	 *
+	 * See the below "Extending the Default Translator" section
+	 * for an example on inheriting some of the default handlebars
+	 * translator's functionality. */
+	translator: templateExport.translators.handlebars(
+		/* You must pass handlebars as your first argument
+		 * (see v0.0.2 commit for v0.0.2 for an explanation) */
+		handlebars.create(),
+		/* The second argument is optional. It allows you to
+		 * specify functions to determine if a template
+		 * should be considered a partial (isPartial), and if so,
+		 * what name to register with handlebars (getPartialName)
+		 * If either is omitted, the default implementations
+		 * (shown below) will be used. */
+		{
+			getPartialName: function( partialPath ) {
+				// The relative path of the partial from sourceDir, without the .tmpl extension
+				return partialPath.replace( '.tmpl', '' );
+			},
+			isPartial: function( filePath ) {
+				// Something is considered a partial if the filename begins with `_`
+				return path.basename( filePath )[ 0 ] === '_';
+			}
+		}
+	)
+});
+
+var homepageContents = homepageExporter('src/templates/index.tmpl');
 ```
 
 ### Options
@@ -212,7 +182,7 @@ Say you want to register a set of helper functions with handlebars to make avail
 ```javascript
 var _ = require( 'underscore' );
 var handlebars = require( 'handlebars' );
-var defaultTranslators = require( 'grunt-template-export' ).translators;
+var defaultTranslators = require( 'template-export' ).translators;
 
 module.exports = function( translatorToUse, helperOverrides ) {
 
