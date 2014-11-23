@@ -4,7 +4,8 @@
   "main": "./lib/template-export.js",
   "author": "Luke Zilioli <elzee08@gmail.com> (http://lukezilioli.com/)",
   "dependencies": {
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "lz-node-utils" :"lzilioli/lz-node-utils#d130842"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -14,8 +15,7 @@
     "grunt-todo": "~0.4.0",
     "jshint-stylish": "^0.4.0",
     "load-grunt-config": "^0.12.0",
-    "shelljs": "~0.3.0",
-    "lz-node-utils" :"lzilioli/lz-node-utils"
+    "shelljs": "~0.3.0"
   },
   "repository": {
     "type": "git",
