@@ -216,3 +216,8 @@ module.exports = function( translatorToUse, helperOverrides ) {
     };
 };
 ```
+
+# Changelog
+
+- v0.1.2
+-- translator-handlebars strips YAML front matter from template contents prior to passing to handlebars
