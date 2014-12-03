@@ -5,7 +5,7 @@
   "author": "Luke Zilioli <elzee08@gmail.com> (http://lukezilioli.com/)",
   "dependencies": {
     "underscore": "^1.6.0",
-    "lz-node-utils" :"lzilioli/lz-node-utils#81271a2"
+    "lz-node-utils" :"lzilioli/lz-node-utils#v0.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
