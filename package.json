@@ -1,11 +1,11 @@
 {
   "name": "template-export",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./lib/template-export.js",
   "author": "Luke Zilioli <elzee08@gmail.com> (http://lukezilioli.com/)",
   "dependencies": {
     "underscore": "^1.6.0",
-    "lz-node-utils" :"lzilioli/lz-node-utils#d130842"
+    "lz-node-utils" :"lzilioli/lz-node-utils#81271a2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
