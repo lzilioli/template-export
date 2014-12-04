@@ -1,11 +1,14 @@
 {
   "name": "template-export",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "./lib/template-export.js",
   "author": "Luke Zilioli <elzee08@gmail.com> (http://lukezilioli.com/)",
   "dependencies": {
+    "fs": "^0.0.2",
+    "handlebars": "^2.0.0",
+    "lz-node-utils": "^0.1.1",
+    "path": "^0.4.9",
     "underscore": "^1.6.0",
-    "lz-node-utils" :"^0.1.1",
     "yaml-front-matter": "^3.0.1"
   },
   "devDependencies": {
