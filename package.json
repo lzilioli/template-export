@@ -1,6 +1,6 @@
 {
   "name": "template-export",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "./lib/template-export.js",
   "author": "Luke Zilioli <elzee08@gmail.com> (http://lukezilioli.com/)",
   "dependencies": {
