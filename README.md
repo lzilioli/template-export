@@ -221,3 +221,5 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 - v0.1.2
 -- translator-handlebars strips YAML front matter from template contents prior to passing to handlebars
+- v0.1.3
+-- use lz-node-utils package from npm
