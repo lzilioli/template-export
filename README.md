@@ -14,7 +14,7 @@ The template-export module has five primary concerns:
 3. return the result of (2)
 4. enforce a light-handed, yet reasonable separation between the model and the translator
 
-The magic is in the fact that the model fetching and translation are both handeled by user-defined modules that simply need to expose a pre-determined API. As long as the modules follow this API, they can do anything they need to under-the-hood in order to generate the proper output. Specifying an implementation for either of these modules is optional.
+The magic is in the fact that the model fetching and translation are both handled by user-defined modules that simply need to expose a pre-determined API. As long as the modules follow this API, they can do anything they need to under-the-hood in order to generate the proper output. Specifying an implementation for either of these modules is optional.
 
 ## Usage
 
@@ -38,8 +38,17 @@ var exporter = templateExport.exporter({
      * pairs, where each value specifies a set of files
      * associated with the given key (array).
      *
+     * You can also specify the values in the form:
+     * { cwd: 'templates/', src: [ '**\/*.tmpl ] }
+     *
      * The value is passed to function that does the equivalent
      * of grunt's file.expand function.
+     *
+     * Each key in sourceFiles will be converted to an object of the form:
+     * { contents: <file contents>,
+     *   path: <relative path to file from cwd>,
+     *   fqp: <fully qualified path to file>
+     * }
      *
      * The resulting object will then be passed to
      * model.init and translator.init. Those functions
@@ -79,7 +88,7 @@ var exporter = templateExport.exporter({
 // Get the rendered homepage, specified by src/templates/index.tmpl
 var homepageExporter = templateExport({
   sourceFiles: {
-      templates: 'templates/**/*.tmpl'
+      templates: [ 'templates/**/*.tmpl' ]
   },
   /* A default handlebars translator is provided. This
    * translator will automatically register all of the
@@ -219,6 +228,8 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 # Changelog
 
+- v0.2.0
+-- change the way in which sourceFiles is specified to make it easier to deal with fully qualified paths
 - v0.1.2
 -- translator-handlebars strips YAML front matter from template contents prior to passing to handlebars
 - v0.1.3
