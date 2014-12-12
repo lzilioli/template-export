@@ -228,6 +228,8 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 # Changelog
 
+- v0.2.1
+-- fix to allow specification of sourceFiles without the string being an array
 - v0.2.0
 -- change the way in which sourceFiles is specified to make it easier to deal with fully qualified paths
 - v0.1.2
