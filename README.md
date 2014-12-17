@@ -19,7 +19,7 @@ The magic is in the fact that the model fetching and translation are both handle
 ## Usage
 
 ```bash
-npm install --save lzilioli/template-export
+npm install --save template-export
 ```
 
 
@@ -34,30 +34,16 @@ var exporter = templateExport.exporter({
    * reserved keys (explained below):
    *  [ sourceFiles | translator | model ] */
   sourceFiles: {
-    /* This should be an object containing key/value
-     * pairs, where each value specifies a set of files
-     * associated with the given key (array).
-     *
-     * You can also specify the values in the form:
-     * { cwd: 'templates/', src: [ '**\/*.tmpl ] }
-     *
-     * The value is passed to function that does the equivalent
-     * of grunt's file.expand function.
-     *
-     * Each key in sourceFiles will be converted to an object of the form:
-     * { contents: <file contents>,
-     *   path: <relative path to file from cwd>,
-     *   fqp: <fully qualified path to file>
-     * }
-     *
-     * The resulting object will then be passed to
-     * model.init and translator.init. Those functions
-     * may do with the object what they please.
-     *
-     * This might be used to pass a list of markdown files
-     * to your model, and a set of templates to your
-     * translator for proper rendering. It's all up
-     * to you. */
+    /* Arg for [lz-node-utils.file.expandSourceFiles](http://github.com/lzilioli-lz-node-utils)
+    * The resulting object will then be passed to model.init and
+    * translator.init. Those functions may do with the object what they
+    * please.
+    * 
+    * This might be used to pass a list of markdown files
+    * to your model, and a set of templates to your
+    * translator for proper rendering. It's all up
+    * to you.
+    */
     templates: [ 'templates/**/*.tmpl' ],
     posts: [ 'blog/posts/**/*.md' ]
   },
@@ -228,6 +214,8 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 # Changelog
 
+- v0.2.2
+-- rely on util.expandSourceFiles for expansion of sourceFiles argument
 - v0.2.1
 -- fix to allow specification of sourceFiles without the string being an array
 - v0.2.0
