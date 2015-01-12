@@ -124,6 +124,10 @@ var homepageContents = homepageExporter('src/templates/index.tmpl');
 
 -- see the *Configuring the Task* section above for an explanation of this argument
 
+##### `options.noExpand`
+
+If you pass this flag, sourceFiles will be used as passed in, without being expanded.
+
 #### `options.translator`
 
 ##### `options.translator.init`
