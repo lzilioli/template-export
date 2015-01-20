@@ -218,6 +218,10 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 # Changelog
 
+- v0.2.4
+-- allow model argument to export function to bypass the model
+- v0.2.3
+-- options.noExpand to allow for passing of already expanded file list
 - v0.2.2
 -- rely on util.expandSourceFiles for expansion of sourceFiles argument
 - v0.2.1
