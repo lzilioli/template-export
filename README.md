@@ -218,6 +218,8 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 # Changelog
 
+- v0.2.5
+-- Revert previous change. This is breaking, but 0.2.4 is no longer published.
 - v0.2.4
 -- allow model argument to export function to bypass the model
 - v0.2.3
