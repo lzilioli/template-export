@@ -218,6 +218,8 @@ module.exports = function( translatorToUse, helperOverrides ) {
 
 # Changelog
 
+- v0.2.6
+-- `sourceFiles.templates` and `sourceFiles.tmpl` checked in the handlebars translator before throwing an error
 - v0.2.5
 -- Revert previous change. This is breaking, but 0.2.4 is no longer published.
 - v0.2.4
